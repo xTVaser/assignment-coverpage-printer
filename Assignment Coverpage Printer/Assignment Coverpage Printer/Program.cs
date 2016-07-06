@@ -61,9 +61,13 @@ namespace Assignment_Coverpage_Printer {
 
             Console.WriteLine("What percentage are the programming questions worth? (Out of 100): ");
             rubrik.Add(Console.ReadLine());
-            Console.WriteLine("What percentage is the comments and formatting deduction? (Out of 100): ");
-            rubrik.Add(Console.ReadLine());
             Console.WriteLine("What percentage is the demonstration worth? (Out of 100): ");
+            rubrik.Add(Console.ReadLine());
+            Console.WriteLine("What percentage is the comments deduction? (Out of 100): ");
+            rubrik.Add(Console.ReadLine());
+            Console.WriteLine("What percentage is the formatting deduction? (Out of 100): ");
+            rubrik.Add(Console.ReadLine());
+            Console.WriteLine("What percentage is the late penalty? (Out of 100): ");
             rubrik.Add(Console.ReadLine());
 
             for(int i = 0; i < numAssignments; i++) {
@@ -179,7 +183,7 @@ namespace Assignment_Coverpage_Printer {
                 cell = row.Cells[0];
                 cell.AddParagraph("Demonstration");
                 cell = row.Cells[1];
-                cell.AddParagraph(rubrik[2] + "%");
+                cell.AddParagraph(rubrik[1] + "%");
                 
                 row = table.AddRow();
                 row.Shading.Color = Colors.PaleVioletRed;
@@ -187,10 +191,26 @@ namespace Assignment_Coverpage_Printer {
                 cell = row.Cells[0];
                 cell.AddParagraph("Comment Deduction");
                 cell = row.Cells[1];
-                cell.AddParagraph(rubrik[1] + "%");
+                cell.AddParagraph(rubrik[2] + "%");
+
+                row = table.AddRow();
+                row.Shading.Color = Colors.PaleVioletRed;
+                row.Style = "Normal";
+                cell = row.Cells[0];
+                cell.AddParagraph("Formatting Deduction");
+                cell = row.Cells[1];
+                cell.AddParagraph(rubrik[3] + "%");
+
+                row = table.AddRow();
+                row.Shading.Color = Colors.PaleVioletRed;
+                row.Style = "Normal";
+                cell = row.Cells[0];
+                cell.AddParagraph("Late Penalty");
+                cell = row.Cells[1];
+                cell.AddParagraph(rubrik[4] + "%");
 
                 table.SetEdge(0, 0, 2, 3, Edge.Box, MigraDoc.DocumentObjectModel.BorderStyle.Single, 1.5, Colors.Black);
-                table.Format.SpaceAfter = "1cm";
+                table.Format.SpaceAfter = "1.5cm";
 
                 section.Add(table);
 
@@ -199,7 +219,7 @@ namespace Assignment_Coverpage_Printer {
                 paragraph.Style = "Heading1";
                 paragraph.Format.SpaceAfter = "0.25cm";
 
-                for(int i = 3; i < rubrik.Count; i+=2) {
+                for(int i = 5; i < rubrik.Count; i+=2) {
 
                     paragraph = section.AddParagraph(rubrik[i]+" (\t\t/"+rubrik[i+1]+")");
                     paragraph.Style = "Heading2";
@@ -211,7 +231,7 @@ namespace Assignment_Coverpage_Printer {
                     paragraph.Format.LeftIndent = "2cm";
                 }
                 
-                paragraph = section.AddParagraph("Demonstration " + "(\t\t/" + rubrik[2]+")");
+                paragraph = section.AddParagraph("Demonstration " + "(\t\t/" + rubrik[1]+")");
                 paragraph.Format.Alignment = ParagraphAlignment.Left;
                 paragraph.Style = "Heading1";
 
@@ -220,7 +240,16 @@ namespace Assignment_Coverpage_Printer {
                 paragraph.Format.SpaceAfter = "2cm";
                 paragraph.Format.LeftIndent = "1cm";
             
-                paragraph = section.AddParagraph("Comment Deduction " + "(\t\t/" + rubrik[1] + ")");
+                paragraph = section.AddParagraph("Comment Deduction " + "(\t\t/" + rubrik[2] + ")");
+                paragraph.Format.Alignment = ParagraphAlignment.Left;
+                paragraph.Style = "Heading1";
+
+                paragraph = section.AddParagraph("Notes: ");
+                paragraph.Style = "Normal";
+                paragraph.Format.SpaceAfter = "2cm";
+                paragraph.Format.LeftIndent = "1cm";
+
+                paragraph = section.AddParagraph("Formatting Deduction " + "(\t\t/" + rubrik[3] + ")");
                 paragraph.Format.Alignment = ParagraphAlignment.Left;
                 paragraph.Style = "Heading1";
 
